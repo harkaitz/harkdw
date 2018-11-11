@@ -50,8 +50,9 @@ proc harkdc { args } {
 proc harkd-open { url } {
     global tcl_platform
     if {$tcl_platform(platform) eq {windows}} {
-	exec cmd.exe /C start $url $url 
+	puts $url
+	exec cmd.exe /C start $url $url &
     } else {
-	exec xdg-open $url >@ stdout 2>@ stderr <@ stdin
+	catch { exec xdg-open $url } 
     }
 }
